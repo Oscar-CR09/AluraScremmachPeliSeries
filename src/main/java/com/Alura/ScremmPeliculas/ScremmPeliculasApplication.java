@@ -1,6 +1,7 @@
 package com.Alura.ScremmPeliculas;
 
 import com.Alura.ScremmPeliculas.model.DatoSeries;
+import com.Alura.ScremmPeliculas.model.DatosEpisodio;
 import com.Alura.ScremmPeliculas.service.ConsumoAPI;
 import com.Alura.ScremmPeliculas.service.ConvierteDatos;
 import org.springframework.boot.CommandLineRunner;
@@ -30,5 +31,9 @@ public class ScremmPeliculasApplication implements CommandLineRunner {
 		ConvierteDatos conversor = new ConvierteDatos();
 		DatoSeries datos = conversor.obtenerDatos(json, DatoSeries.class);
 		System.out.println(datos);
+		json = consumoApi.obtenerDatos("https://www.omdbapi.com/?t=game+of+thrones&Season=1&episode=1&apikey=4fc7c187");
+		DatosEpisodio episodios =conversor.obtenerDatos(json, DatosEpisodio.class);
+		System.out.println(episodios);
+
 	}
 }
