@@ -3,6 +3,7 @@ package com.Alura.ScremmPeliculas;
 import com.Alura.ScremmPeliculas.model.DatoSeries;
 import com.Alura.ScremmPeliculas.model.DatosEpisodio;
 import com.Alura.ScremmPeliculas.model.DatosTemporada;
+import com.Alura.ScremmPeliculas.principal.Principal;
 import com.Alura.ScremmPeliculas.service.ConsumoAPI;
 import com.Alura.ScremmPeliculas.service.ConvierteDatos;
 import org.springframework.boot.CommandLineRunner;
@@ -23,31 +24,8 @@ public class ScremmPeliculasApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("Primer proyecto Spring sin Web");
-		var consumoApi = new ConsumoAPI();
-		//var json = consumoApi.obtenerDatos("https://www.omdbapi.com/?t=game+of+thrones&Season=1&apikey=4fc7c187");
-		var json = consumoApi.obtenerDatos("https://www.omdbapi.com/?t=game+of+thrones&&apikey=4fc7c187");
-
-
-		System.out.println(json);
-//		json = consumoApi.obtenerDatos("https://coffee.alexflipnote.dev/random.json");
-//		System.out.println(json);
-		ConvierteDatos conversor = new ConvierteDatos();
-		DatoSeries datos = conversor.obtenerDatos(json, DatoSeries.class);
-		System.out.println(datos);
-		json = consumoApi.obtenerDatos("https://www.omdbapi.com/?t=game+of+thrones&Season=1&episode=1&apikey=4fc7c187");
-		DatosEpisodio episodios =conversor.obtenerDatos(json, DatosEpisodio.class);
-		System.out.println(episodios);
-
-		List<DatosTemporada> temporadas = new ArrayList<>();
-		for (int i = 1; i <datos.totalTemporada() ; i++) {
-			json = consumoApi.obtenerDatos("https://www.omdbapi.com/?t=game+of+thrones&Season="+i+"&apikey=4fc7c187");
-			var datosTemporadas = conversor.obtenerDatos(json,DatosTemporada.class);
-			temporadas.add(datosTemporadas);
-
-		}
-		temporadas.forEach(System.out::println);
-
+		Principal principal = new Principal();
+		principal.muestraElMenu();
 
 	}
 }
