@@ -1,6 +1,7 @@
 package com.Alura.ScremmPeliculas.principal;
 
 import com.Alura.ScremmPeliculas.model.DatoSeries;
+import com.Alura.ScremmPeliculas.model.DatosEpisodio;
 import com.Alura.ScremmPeliculas.model.DatosTemporada;
 import com.Alura.ScremmPeliculas.service.ConsumoAPI;
 import com.Alura.ScremmPeliculas.service.ConvierteDatos;
@@ -35,7 +36,16 @@ public class Principal {
             temporadas.add(datosTemporadas);
 
         }
-        temporadas.forEach(System.out::println);
-    }
+       // temporadas.forEach(System.out::println);
 
+//        //mostrar solo el titulo de los  episodios de las temporadas
+//        for (int i = 0; i < datos.totalTemporada(); i++) {
+//            List<DatosEpisodio> episodiosTemporada = temporadas.get(i).episodios();
+//            for (int j = 0; j < episodiosTemporada.size(); j++) {
+//                System.out.println(episodiosTemporada.get(j).titulo());
+//
+//            }
+//        }
+        temporadas.forEach(t-> t.episodios().forEach(e -> System.out.println(e.titulo())));
+    }
 }
