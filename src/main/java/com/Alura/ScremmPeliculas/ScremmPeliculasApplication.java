@@ -3,6 +3,7 @@ package com.Alura.ScremmPeliculas;
 import com.Alura.ScremmPeliculas.model.DatoSeries;
 import com.Alura.ScremmPeliculas.model.DatosEpisodio;
 import com.Alura.ScremmPeliculas.model.DatosTemporada;
+import com.Alura.ScremmPeliculas.principal.EjemploStreams;
 import com.Alura.ScremmPeliculas.principal.Principal;
 import com.Alura.ScremmPeliculas.service.ConsumoAPI;
 import com.Alura.ScremmPeliculas.service.ConvierteDatos;
@@ -24,8 +25,10 @@ public class ScremmPeliculasApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Principal principal = new Principal();
-		principal.muestraElMenu();
-
+//		Principal principal = new Principal();
+//		principal.muestraElMenu();
+//<
+		EjemploStreams ejemploStreams = new EjemploStreams();
+		ejemploStreams.muestraEjemplo();
 	}
 }
