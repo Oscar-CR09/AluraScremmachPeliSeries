@@ -1,12 +1,11 @@
 package com.Alura.ScremmPeliculas.service;
 
-import com.Alura.ScremmPeliculas.model.DatoSeries;
+import com.Alura.ScremmPeliculas.model.DatosSerie;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class ConvierteDatos implements IConvierteDatos{
+public class ConvierteDatos implements IConvierteDatos {
     private ObjectMapper objectMapper = new ObjectMapper();
-
 
     @Override
     public <T> T obtenerDatos(String json, Class<T> clase) {
