@@ -1,14 +1,24 @@
 package com.Alura.ScremmPeliculas.model;
 
-import com.Alura.ScremmPeliculas.service.ConsultaChatGPT;
+import jakarta.persistence.*;
 
 import java.util.OptionalDouble;
 
+@Entity
+@Table(name="series")
 public class Serie {
+
+    @jakarta.persistence.Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
+
+    @Column(unique = true)
     private String titulo;
+
     private Integer totalTemporadas;
     private Double evaluacion;
     private String poster;
+    @Enumerated(EnumType.STRING)
     private Categoria genero;
     private String actores;
     private String sinopsis;
@@ -20,7 +30,8 @@ public class Serie {
         this.poster = datosSerie.poster();
         this.genero = Categoria.fromString(datosSerie.genero().split(",")[0].trim());
         this.actores = datosSerie.actores();
-        this.sinopsis = ConsultaChatGPT.obtenerTraduccion(datosSerie.sinopsis()) ;
+        this.sinopsis =datosSerie.sinopsis();
+
     }
 
     @Override
@@ -34,6 +45,13 @@ public class Serie {
                 ", sinopsis='" + sinopsis + '\'';
     }
 
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id) {
+        Id = id;
+    }
     public String getTitulo() {
         return titulo;
     }
