@@ -23,9 +23,12 @@ public class Serie {
     private Categoria genero;
     private String actores;
     private String sinopsis;
-    @Transient
+
     private List<Episodio> episodios;
 
+    public Serie(){
+
+    }
 
     public Serie(DatosSerie datosSerie){
         this.titulo = datosSerie.titulo();
