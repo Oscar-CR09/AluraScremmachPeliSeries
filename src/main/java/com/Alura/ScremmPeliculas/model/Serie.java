@@ -1,21 +1,17 @@
 package com.Alura.ScremmPeliculas.model;
-
+import com.fasterxml.jackson.annotation.JsonAlias;
 import jakarta.persistence.*;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalDouble;
-
 @Entity
-@Table(name="series")
+@Table(name = "series")
 public class Serie {
-
-    @jakarta.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
-
+    private Long id;
     @Column(unique = true)
-    private String titulo;
-
+    private  String titulo;
     private Integer totalTemporadas;
     private Double evaluacion;
     private String poster;
@@ -23,42 +19,38 @@ public class Serie {
     private Categoria genero;
     private String actores;
     private String sinopsis;
+    @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Episodio> episodios = new ArrayList<>();
 
-    private List<Episodio> episodios;
+    public Serie(){}
 
-    public Serie(){
-
-    }
-
-    public Serie(DatosSerie datosSerie){
+    public Serie(DatosSerie datosSerie) {
         this.titulo = datosSerie.titulo();
         this.totalTemporadas = datosSerie.totalTemporadas();
-        this.evaluacion = OptionalDouble.of(Double.valueOf(datosSerie.evaluacion())).orElse(0);
+        this.evaluacion = OptionalDouble.of(Double.valueOf(datosSerie.evaluacion()))
+                .orElse(0);
         this.poster = datosSerie.poster();
         this.genero = Categoria.fromString(datosSerie.genero().split(",")[0].trim());
         this.actores = datosSerie.actores();
-        this.sinopsis =datosSerie.sinopsis();
-
-    }
-
-    @Override
-    public String toString() {
-        return  "genero=" + genero +
-                "titulo='" + titulo + '\'' +
-                ", totalTemporadas=" + totalTemporadas +
-                ", evaluacion=" + evaluacion +
-                ", poster='" + poster + '\'' +
-                ", actores='" + actores + '\'' +
-                ", sinopsis='" + sinopsis + '\'';
-    }
+            }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
+
+    public List<Episodio> getEpisodios() {
+        return episodios;
+    }
+
+    public void setEpisodios(List<Episodio> episodios) {
+        episodios.forEach(e -> e.setSerie(this));
+        this.episodios = episodios;
+    }
+
     public String getTitulo() {
         return titulo;
     }
@@ -113,5 +105,16 @@ public class Serie {
 
     public void setSinopsis(String sinopsis) {
         this.sinopsis = sinopsis;
+    }
+
+    @Override
+    public String toString() {
+        return  "genero=" + genero +
+                ", titulo='" + titulo + '\'' +
+                ", totalTemporadas=" + totalTemporadas +
+                ", evaluacion=" + evaluacion +
+                ", poster='" + poster + '\'' +
+                ", actores='" + actores + '\'' +
+                ", sinopsis='" + sinopsis;
     }
 }
